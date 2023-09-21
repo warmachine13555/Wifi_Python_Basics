@@ -1,0 +1,1 @@
+# Schreiben Sie ein Programm, das aus den beiden Katheten eines rechtwinkeligen Dreiecks dessen Fläche berechnet.
