@@ -1,0 +1,4 @@
+{
+    "maxLength": 80,
+    "maxRetry": 3
+}
