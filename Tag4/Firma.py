@@ -1,7 +1,7 @@
 """
 Firma:
 - Mitarbeiter (Basisklasse)
-- Praktikanten (abgeleitet von der Basisklasse)
+- Praktikant (abgeleitet von der Basisklasse)
 - Manager (abgeleitet von der Basisklasse)
 
 Klasse Mitarbeiter:
@@ -11,94 +11,102 @@ Attribute:
 - Geburtsdatum
 - Monatsgehalt
 
-Methoden/Funktionen
+Methoden/Funktionen:
 - Konstruktor
 - ausgabe
-- jahresgehalt()
+- jahresgehalt() => Monatsgehalt * 12
 
 Klasse Praktikant:
 
 Attribute:
-- gleich wie Mitarbeiter
+- gleiche Attribute wie Mitarbeiter
 - zusätzlich Monate gearbeitet
 
-Methoden:
-- gleich wie Mitarbeiter
+Methoden/Funktionen:
+- gleiche Methoden wie Mitarbeiter
 
 Klasse Manager:
 
 Attribute:
-- gleich wie Mitarbeiter
+- gleiche Attribute wie Mitarbeiter
 - zusätzlich Bonus
 
-Methoden:
-- gleich wie Mitarbeiter
-
+Methoden/Funktionen:
+- gleiche Methoden wie Mitarbeiter
 """
 
-# Basisklasse
+
+# Basis-Klasse Mitarbeiter
 class Mitarbeiter:
     # Konstruktor
-    def __init__(self, name, gebdat, mgehalt):
-       # Attribute
-       self.name = name
-       self.gebdat = gebdat
-       self.mgehalt = mgehalt 
-       
+    def __init__(self, name, geburtsdatum, monatsgehalt):
+        # Attribute
+        self.name = name
+        self.geburtsdatum = geburtsdatum
+        self.monatsgehalt = monatsgehalt
+
     # Ausgabe
     def __str__(self):
-        return f"Mitarbeiter Name: {self.name} Geburtsdatum: {self.gebdat} Monatsgehalt: {self.mgehalt} Jahresgehalt: {self.jahresgehalt()}"
-    
+        return f"Mitarbeiter Name: {self.name}, Geburtsdatum: {self.geburtsdatum}, Monatsgehalt: {self.monatsgehalt} jahresgehalt: {self.jahresgehalt()}"
+
+    # Jahresgehalt
     def jahresgehalt(self):
-        return 14 * self.mgehalt
+        return self.monatsgehalt * 14
+
 
 # Klasse Praktikant
 class Praktikant(Mitarbeiter):
     # Konstruktor
-    def __init__(self, name, gebdat, mgehalt, monate):
+    def __init__(self, name, geburtsdatum, monatsgehalt, monate):
+        # Attribute
         # 1) Aufruf des Konstruktors der Basisklasse
-        super().__init__(name, gebdat, mgehalt)
-        # 2) Init von zusätzlichen Attributen
+        super().__init__(name, geburtsdatum, monatsgehalt)
+        # 2) Initialisierung der eigenen Attribute
         self.monate = monate
-        
+
     # Ausgabe
     def __str__(self):
-        return f"Praktikant Name: {self.name} Geburtsdatum: {self.gebdat} Monatsgehalt: {self.mgehalt} Monate: {self.monate} Jahresgehalt: {self.jahresgehalt()}"
-    
+        return f"Praktikant Name: {self.name}, Geburtsdatum: {self.geburtsdatum}, Monatsgehalt: {self.monatsgehalt}, Monate: {self.monate}, jahresgehalt: {self.jahresgehalt()}"
+
     # Jahresgehalt
-    # Wenn eine funktion gleich wie in der Basisklasse heist, 
-    # so überschreiben (ersetzen) wir die Funktion der Basisklasse
+    # Wenn eine Funktion gleich wie in der Basiklasse heist,
+    # so wird die Funktion der Basisklasse überschrieben
     def jahresgehalt(self):
-        return self.monate * self.mgehalt
-    
-# Manager
+        return self.monatsgehalt * self.monate
+
+
+# Klasse Manager
 class Manager(Mitarbeiter):
     # Konstruktor
-    def __init__(self, name, gebdat, mgehalt, bonus):
+    def __init__(self, name, geburtsdatum, monatsgehalt, bonus):
+        # Attribute
         # 1) Aufruf des Konstruktors der Basisklasse
-        super().__init__(name, gebdat, mgehalt)
-        # 2) Init von zusätzlichen Attributen
+        super().__init__(name, geburtsdatum, monatsgehalt)
+        # 2) Initialisierung der eigenen Attribute
         self.bonus = bonus
-    
+
     # Ausgabe
     def __str__(self):
-        return f"Manager Name: {self.name} Geburtsdatum: {self.gebdat} Monatsgehalt: {self.mgehalt} Bonus: {self.bonus} Jahresgehalt: {self.jahresgehalt()}"
-    
+        return f"Manager Name: {self.name}, Geburtsdatum: {self.geburtsdatum}, Monatsgehalt: {self.monatsgehalt}, Bonus: {self.bonus}, jahresgehalt: {self.jahresgehalt()}"
+
     # Jahresgehalt
+    # Wenn eine Funktion gleich wie in der Basiklasse heist,
+    # so wird die Funktion der Basisklasse überschrieben
     def jahresgehalt(self):
         # wir können Methoden der Basisklasse mit super() aufrufen
-        # Vorteil => Änderungsfreundlichkeit, es gibt nur eine Stelle für Änderungen
+        # Vorteil: wenn sich die Methode in der Basisklasse ändert, so wird die Änderung automatisch übernommen.
         return super().jahresgehalt() + self.bonus
-    
-# Manager
-    
+
+
 # Hauptprogramm
-peter = Mitarbeiter("Peter","2000-01-01", 2500)
+peter = Mitarbeiter("Peter", "01.01.2000", 2500)
 print(peter)
-fritz = Praktikant("Fritz", "2005-02-02", 1000, 3)
+
+fritz = Praktikant("Fritz", "01.01.2000", 1000, 3)
 print(fritz)
-franz = Manager("Franz", "1990-03-03", 5000, 3000)
-print(franz)
+
+franz = Manager("Hans", "01.01.1990", 5000, 3000)
+print(fritz)
 
 # Objekte in Listen speichern
 mitarbeiter = [peter, fritz, franz]
